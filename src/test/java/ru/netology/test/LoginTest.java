@@ -36,7 +36,50 @@ public class LoginTest {
     }
     @Test
     void shouldErrorNotificationIfUsedRandomVerificationCode() {
-
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        verificationPage.verifyVerificationPageVisible();
+        var verificationCode = DataHelper.generateRandomVerificationCode();
+        verificationPage.verify(verificationCode.getCode());
+        verificationPage.verifyErrorNotification("Ошибка! \nНеверно указан код! Попробуйте ещё раз.");
+    }
+    @Test
+    void shouldErrorNotificationIfLoginRandomUser() {
+        var authInfo = DataHelper.generateRandomUser();
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
+    }
+    @Test
+    void shouldErrorNotificationIfInvalidPasswordUsed() {
+        var authInfo = DataHelper.getAuthInfoWithInvalidPassword();
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
+    }
+    @Test
+    void shouldErrorNotificationIfInvalidLoginUsed() {
+        var authInfo = DataHelper.getAuthInfoWithInvalidLogin();
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
+    }
+    @Test
+    void shouldErrorNotificationIfInvalidPasswordEnteredMoreThanThreeTimes() {
+        var authInfo = DataHelper.getAuthInfoWithInvalidPassword();
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
+        loginPage.clearPasswordAndLoginFields();
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
+        loginPage.clearPasswordAndLoginFields();
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
+        loginPage.verifyBlockedUserStatus(authInfo);
     }
 
+
 }
+//        for (int i = 0; i < 3; i++) {
+//          var authInfo = DataHelper.getAuthInfoWithInvalidPassword();
+//          loginPage.validLogin(authInfo);
+//          loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
+//          loginPage.clearPasswordAndLoginFields();
+//        }

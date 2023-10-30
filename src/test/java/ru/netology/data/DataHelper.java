@@ -20,6 +20,12 @@ public class DataHelper {
     public static AuthInfo getAuthInfo() {
         return new AuthInfo("vasya", "qwerty123");
     }
+    public static AuthInfo getAuthInfoWithInvalidPassword() {
+        return new AuthInfo("vasya", "ytrewq123");
+    }
+    public static AuthInfo getAuthInfoWithInvalidLogin() {
+        return new AuthInfo("vasia", "qwerty123");
+    }
 
     private static String generateRandomLogin() {
         return faker.name().username();
@@ -29,7 +35,7 @@ public class DataHelper {
         return faker.internet().password();
     }
 
-    private static AuthInfo generateRandomUser() {
+    public static AuthInfo generateRandomUser() {
         return new AuthInfo(generateRandomLogin(), generateRandomPassword());
     }
 
@@ -38,7 +44,7 @@ public class DataHelper {
         String code;
     }
 
-    private static VerificationCode generateRandomVerificationCode() {
+    public static VerificationCode generateRandomVerificationCode() {
         return new VerificationCode(faker.numerify("#####"));
     }
 }
