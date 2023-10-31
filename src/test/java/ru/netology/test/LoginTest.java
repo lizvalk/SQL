@@ -62,10 +62,5 @@ public class LoginTest {
         loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
     }
 
-    @Test
-    void should
-
-
-
 }
 
