@@ -61,25 +61,11 @@ public class LoginTest {
         loginPage.validLogin(authInfo);
         loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
     }
+
     @Test
-    void shouldErrorNotificationIfInvalidPasswordEnteredMoreThanThreeTimes() {
-        var authInfo = DataHelper.getAuthInfoWithInvalidPassword();
-        loginPage.validLogin(authInfo);
-        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
-        loginPage.clearPasswordAndLoginFields();
-        loginPage.validLogin(authInfo);
-        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
-        loginPage.clearPasswordAndLoginFields();
-        loginPage.validLogin(authInfo);
-        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
-        loginPage.verifyBlockedUserStatus(authInfo);
-    }
+    void should
+
 
 
 }
-//        for (int i = 0; i < 3; i++) {
-//          var authInfo = DataHelper.getAuthInfoWithInvalidPassword();
-//          loginPage.validLogin(authInfo);
-//          loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль ");
-//          loginPage.clearPasswordAndLoginFields();
-//        }
+

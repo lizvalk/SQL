@@ -33,7 +33,7 @@ public class SQLHelper {
         runner.execute(connection, "DELETE FROM auth_codes");
         runner.execute(connection, "DELETE FROM card_transactions");
         runner.execute(connection, "DELETE FROM cards");
-        //runner.execute(connection, "DELETE FROM users");
+        runner.execute(connection, "DELETE FROM users");
     }
 
     @SneakyThrows
@@ -42,10 +42,4 @@ public class SQLHelper {
         runner.execute(connection, "DELETE FROM auth_codes");
     }
 
-    @SneakyThrows
-    public static String getUserStatus(DataHelper.AuthInfo authInfo) {
-        var codeSQL = "SELECT status FROM users WHERE login IN (\'" + authInfo.getLogin() + "\')";
-        var conn = getConn();
-        return runner.query(conn, codeSQL, new ScalarHandler<String>());
-    }
 }
